@@ -1,0 +1,311 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 800" width="100%" height="100%">
+  <!-- Definitions of Markers & Filters -->
+  <defs>
+    <!-- Arrow Markers for different data streams -->
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#6B7280"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#4F46E5"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#D97706"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1050" height="800" fill="#FFFFFF"/>
+
+  <!-- ================= LEFT PANEL: GLOBAL ARCHITECTURE ================= -->
+  <!-- Outer Card Container -->
+  <rect x="20" y="20" width="450" height="745" rx="12" fill="#FAFAFA" stroke="#E5E7EB" stroke-width="1.5"/>
+  <text x="245" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1F2937">Global DiT Architecture</text>
+
+  <!-- Left Inputs & Embedders -->
+  <!-- Input x -->
+  <rect x="60" y="80" width="100" height="40" rx="6" fill="#F3F4F6" stroke="#4B5563" stroke-width="1.5"/>
+  <text x="110" y="98" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#1F2937">Latent x</text>
+  <text x="110" y="112" font-family="monospace" font-size="9" text-anchor="middle" fill="#4B5563">(B, C, H, W)</text>
+
+  <!-- x_embedder -->
+  <rect x="60" y="140" width="100" height="40" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="110" y="158" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#1E40AF">Patchify &amp; Proj.</text>
+  <text x="110" y="172" font-family="monospace" font-size="8" text-anchor="middle" fill="#2563EB">Conv2d (p x p)</text>
+
+  <!-- x addition node -->
+  <circle cx="110" cy="205" r="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+  <line x1="105" y1="205" x2="115" y2="205" stroke="#2563EB" stroke-width="1.5"/>
+  <line x1="110" y1="200" x2="110" y2="210" stroke="#2563EB" stroke-width="1.5"/>
+
+  <!-- Positional Embeddings -->
+  <rect x="180" y="190" width="80" height="30" rx="4" fill="#F3F4F6" stroke="#4B5563" stroke-width="1"/>
+  <text x="220" y="209" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#374151">+ Pos Embed</text>
+
+  <!-- Connections for x path -->
+  <path d="M 110 120 L 110 140" fill="none" stroke="#4B5563" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <path d="M 110 180 L 110 195" fill="none" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <path d="M 180 205 L 120 205" fill="none" stroke="#4B5563" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+
+  <!-- Right Inputs: Timestep & Label -->
+  <!-- Timestep t -->
+  <rect x="270" y="80" width="75" height="40" rx="6" fill="#F5F3FF" stroke="#4F46E5" stroke-width="1.5"/>
+  <text x="307.5" y="98" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#1F2937">Timestep t</text>
+  <text x="307.5" y="112" font-family="monospace" font-size="9" text-anchor="middle" fill="#4B5563">(B,)</text>
+
+  <!-- Label y -->
+  <rect x="360" y="80" width="75" height="40" rx="6" fill="#F5F3FF" stroke="#4F46E5" stroke-width="1.5"/>
+  <text x="397.5" y="98" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#1F2937">Label y</text>
+  <text x="397.5" y="112" font-family="monospace" font-size="9" text-anchor="middle" fill="#4B5563">(B,)</text>
+
+  <!-- t_embedder -->
+  <rect x="270" y="140" width="75" height="40" rx="6" fill="#F5F3FF" stroke="#4F46E5" stroke-width="1.5"/>
+  <text x="307.5" y="158" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#4338CA">Time Embed</text>
+  <text x="307.5" y="172" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#4F46E5">MLP (SiLU)</text>
+
+  <!-- y_embedder -->
+  <rect x="360" y="140" width="75" height="40" rx="6" fill="#F5F3FF" stroke="#4F46E5" stroke-width="1.5"/>
+  <text x="397.5" y="158" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#4338CA">Label Embed</text>
+  <text x="397.5" y="172" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#4F46E5">Embedding</text>
+
+  <!-- c addition node -->
+  <circle cx="347" cy="205" r="10" fill="#FFFFFF" stroke="#4F46E5" stroke-width="1.5"/>
+  <line x1="342" y1="205" x2="352" y2="205" stroke="#4F46E5" stroke-width="1.5"/>
+  <line x1="347" y1="200" x2="347" y2="210" stroke="#4F46E5" stroke-width="1.5"/>
+
+  <!-- Connections for c path -->
+  <path d="M 307.5 120 L 307.5 140" fill="none" stroke="#4F46E5" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <path d="M 397.5 120 L 397.5 140" fill="none" stroke="#4F46E5" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <path d="M 307.5 180 Q 307.5 205 337 205" fill="none" stroke="#4F46E5" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <path d="M 397.5 180 Q 397.5 205 357 205" fill="none" stroke="#4F46E5" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+
+  <!-- Vertical Rails (Data Flow Channels) -->
+  <!-- x rail -->
+  <line x1="110" y1="215" x2="110" y2="255" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <!-- c rail -->
+  <line x1="347" y1="215" x2="347" y2="255" stroke="#4F46E5" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- DiT Blocks Stack -->
+  <!-- Block 1 -->
+  <rect x="50" y="255" width="390" height="60" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="245" y="290" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1E40AF">DiT Block 1</text>
+  <!-- Lines passing through Block 1 -->
+  <line x1="110" y1="255" x2="110" y2="315" stroke="#2563EB" stroke-width="2"/>
+  <line x1="347" y1="255" x2="347" y2="315" stroke="#4F46E5" stroke-width="2"/>
+
+  <!-- Connection between Block 1 and 2 -->
+  <line x1="110" y1="315" x2="110" y2="345" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="347" y1="315" x2="347" y2="345" stroke="#4F46E5" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- Block 2 -->
+  <rect x="50" y="345" width="390" height="60" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="245" y="380" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#1E40AF">DiT Block 2</text>
+  <line x1="110" y1="345" x2="110" y2="405" stroke="#2563EB" stroke-width="1.5"/>
+  <line x1="347" y1="345" x2="347" y2="405" stroke="#4F46E5" stroke-width="1.5"/>
+
+  <!-- Dotted Connection representing N blocks depth -->
+  <line x1="110" y1="405" x2="110" y2="465" stroke="#2563EB" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow-blue)"/>
+  <line x1="347" y1="405" x2="347" y2="465" stroke="#4F46E5" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow-purple)"/>
+  <text x="245" y="440" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#9CA3AF">...</text>
+
+  <!-- Block L -->
+  <rect x="50" y="465" width="390" height="60" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="245" y="500" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1E40AF">DiT Block L (Depth)</text>
+  <line x1="110" y1="465" x2="110" y2="525" stroke="#2563EB" stroke-width="2"/>
+  <line x1="347" y1="465" x2="347" y2="525" stroke="#4F46E5" stroke-width="2"/>
+
+  <!-- Exit from Block L -->
+  <line x1="110" y1="525" x2="110" y2="565" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <line x1="347" y1="525" x2="347" y2="565" stroke="#4F46E5" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- Final Layer -->
+  <rect x="50" y="565" width="390" height="50" rx="8" fill="#FDF2F8" stroke="#DB2777" stroke-width="2"/>
+  <text x="245" y="595" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#9D174D">Final Layer (adaLN modulated)</text>
+  <!-- Inputs going into Final Layer -->
+  <line x1="110" y1="565" x2="110" y2="615" stroke="#2563EB" stroke-width="2"/>
+  <line x1="347" y1="565" x2="347" y2="615" stroke="#4F46E5" stroke-width="2"/>
+
+  <!-- Connection to Unpatchify -->
+  <path d="M 245 615 L 245 645" fill="none" stroke="#DB2777" stroke-width="2" marker-end="url(#arrow-orange)"/>
+
+  <!-- Unpatchify -->
+  <rect x="50" y="645" width="390" height="40" rx="6" fill="#F3F4F6" stroke="#4B5563" stroke-width="1.5"/>
+  <text x="245" y="669" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#1F2937">Unpatchify (Rearrange)</text>
+
+  <!-- Output Arrow -->
+  <path d="M 245 685 L 245 710" fill="none" stroke="#4B5563" stroke-width="2" marker-end="url(#arrow-gray)"/>
+
+  <!-- Output Latent -->
+  <rect x="145" y="710" width="200" height="35" rx="6" fill="#F3F4F6" stroke="#4B5563" stroke-width="1.5"/>
+  <text x="245" y="726" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#1F2937">Output Latent</text>
+  <text x="245" y="738" font-family="monospace" font-size="8" text-anchor="middle" fill="#4B5563">(B, C_out, H, W)</text>
+
+
+  <!-- ================= RIGHT PANEL: DETAILED DiT BLOCK ================= -->
+  <!-- Outer Card Container -->
+  <rect x="490" y="20" width="540" height="745" rx="12" fill="#FAFAFA" stroke="#E5E7EB" stroke-width="1.5"/>
+  <text x="760" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1F2937">Detailed DiT Block (adaLN-Zero)</text>
+
+  <!-- Input Labels at Top -->
+  <!-- Input x_i -->
+  <text x="580" y="90" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#1F2937">Input Sequence x_i</text>
+  <text x="580" y="102" font-family="monospace" font-size="8" text-anchor="middle" fill="#4B5563">(B, N, D)</text>
+
+  <!-- Input c -->
+  <text x="840" y="90" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#4F46E5">Conditioning c</text>
+  <text x="840" y="102" font-family="monospace" font-size="8" text-anchor="middle" fill="#4B5563">(B, D)</text>
+
+  <!-- conditioning arrow to MLP -->
+  <path d="M 840 105 L 840 120" fill="none" stroke="#4F46E5" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+
+  <!-- adaLN-Zero Modulation Block -->
+  <rect x="740" y="120" width="200" height="35" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text x="840" y="141" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#92400E">adaLN Projection (SiLU + Linear)</text>
+
+  <!-- Modulation Output split path -->
+  <path d="M 840 155 L 840 160" fill="none" stroke="#D97706" stroke-width="1.5"/>
+
+  <!-- Tall Splitter Container -->
+  <rect x="740" y="160" width="200" height="520" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5" stroke-dasharray="2 2"/>
+
+  <!-- Splitter Inside Text & Labels -->
+  <text x="840" y="185" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#B45309">Parameter Splitter</text>
+
+  <!-- Parameter Splitter Blocks aligned to match flow vertically -->
+  <!-- 1. Scale & Shift 1 (centered at Y=230) -->
+  <rect x="755" y="212.5" width="170" height="35" rx="4" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="840" y="226" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#B45309">Scale &amp; Shift 1</text>
+  <text x="840" y="239" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#B45309">(γ₁, β₁)</text>
+
+  <!-- 2. Gate 1 (centered at Y=345) -->
+  <rect x="755" y="327.5" width="170" height="35" rx="4" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="840" y="341" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#B45309">Gate 1</text>
+  <text x="840" y="354" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#B45309">(α₁)</text>
+
+  <!-- 3. Scale & Shift 2 (centered at Y=525) -->
+  <rect x="755" y="507.5" width="170" height="35" rx="4" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="840" y="521" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#B45309">Scale &amp; Shift 2</text>
+  <text x="840" y="534" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#B45309">(γ₂, β₂)</text>
+
+  <!-- 4. Gate 2 (centered at Y=645) -->
+  <rect x="755" y="627.5" width="170" height="35" rx="4" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="840" y="641" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#B45309">Gate 2</text>
+  <text x="840" y="654" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#B45309">(α₂)</text>
+
+
+  <!-- Left Stream: x Data Path Flow -->
+  <!-- Split Point for Residual 1 -->
+  <line x1="580" y1="105" x2="580" y2="145" stroke="#2563EB" stroke-width="2"/>
+  <circle cx="580" cy="125" r="3.5" fill="#2563EB"/>
+
+  <!-- Residual 1 Outer Line -->
+  <path d="M 580 125 L 515 125 L 515 400 L 568 400" fill="none" stroke="#2563EB" stroke-width="2" stroke-dasharray="2 2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Main Path: LayerNorm 1 -->
+  <rect x="540" y="145" width="80" height="30" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="580" y="164" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#1E40AF">LayerNorm</text>
+
+  <line x1="580" y1="175" x2="580" y2="215" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Modulate 1 (centered at Y=230) -->
+  <rect x="540" y="215" width="80" height="30" rx="4" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+  <text x="580" y="234" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#047857">Modulate</text>
+
+  <!-- Control Line from Parameter Splitter to Modulate 1 -->
+  <path d="M 755 230 L 620 230" fill="none" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="687.5" y="222" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#059669">γ₁, β₁</text>
+
+  <!-- Modulate 1 output goes straight down to Multi-Head Attn -->
+  <line x1="580" y1="245" x2="580" y2="270" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Multi-Head Attention (MHA) -->
+  <rect x="530" y="270" width="100" height="35" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="580" y="291.5" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#1E40AF">Multi-Head Attn</text>
+
+  <line x1="580" y1="305" x2="580" y2="333" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Gate 1 (Multiplier Circle centered at Y=345) -->
+  <g transform="translate(580,345)">
+    <circle r="12" fill="#FFFFFF" stroke="#059669" stroke-width="2"/>
+    <line x1="-6" y1="-6" x2="6" y2="6" stroke="#059669" stroke-width="2"/>
+    <line x1="6" y1="-6" x2="-6" y2="6" stroke="#059669" stroke-width="2"/>
+  </g>
+
+  <!-- Control Line from Parameter Splitter to Gate 1 -->
+  <path d="M 755 345 L 592 345" fill="none" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="687.5" y="337" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#059669">α₁</text>
+
+  <line x1="580" y1="357" x2="580" y2="388" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Sum Node 1 (centered at Y=400) -->
+  <g transform="translate(580,400)">
+    <circle r="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <line x1="-8" y1="0" x2="8" y2="0" stroke="#2563EB" stroke-width="2"/>
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="#2563EB" stroke-width="2"/>
+  </g>
+
+  <!-- Exit Sum Node 1 and flow into block 2 -->
+  <line x1="580" y1="412" x2="580" y2="450" stroke="#2563EB" stroke-width="2"/>
+  <circle cx="580" cy="430" r="3.5" fill="#2563EB"/>
+
+  <!-- Residual 2 Outer Line -->
+  <path d="M 580 430 L 515 430 L 515 695 L 568 695" fill="none" stroke="#2563EB" stroke-width="2" stroke-dasharray="2 2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Main Path 2: LayerNorm 2 -->
+  <rect x="540" y="450" width="80" height="30" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="580" y="469" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#1E40AF">LayerNorm</text>
+
+  <line x1="580" y1="480" x2="580" y2="510" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Modulate 2 (centered at Y=525) -->
+  <rect x="540" y="510" width="80" height="30" rx="4" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+  <text x="580" y="529" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#047857">Modulate</text>
+
+  <!-- Control Line from Parameter Splitter to Modulate 2 -->
+  <path d="M 755 525 L 620 525" fill="none" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="687.5" y="517" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#059669">γ₂, β₂</text>
+
+  <line x1="580" y1="540" x2="580" y2="570" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Feed-Forward / MLP Block -->
+  <rect x="530" y="570" width="100" height="35" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="580" y="583.5" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#1E40AF">FFN / MLP</text>
+  <text x="580" y="596.5" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#2563EB">Linear-GELU-Linear</text>
+
+  <line x1="580" y1="605" x2="580" y2="633" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Gate 2 (Multiplier Circle centered at Y=645) -->
+  <g transform="translate(580,645)">
+    <circle r="12" fill="#FFFFFF" stroke="#059669" stroke-width="2"/>
+    <line x1="-6" y1="-6" x2="6" y2="6" stroke="#059669" stroke-width="2"/>
+    <line x1="6" y1="-6" x2="-6" y2="6" stroke="#059669" stroke-width="2"/>
+  </g>
+
+  <!-- Control Line from Parameter Splitter to Gate 2 -->
+  <path d="M 755 645 L 592 645" fill="none" stroke="#059669" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="687.5" y="637" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#059669">α₂</text>
+
+  <line x1="580" y1="657" x2="580" y2="683" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Sum Node 2 (centered at Y=695) -->
+  <g transform="translate(580,695)">
+    <circle r="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <line x1="-8" y1="0" x2="8" y2="0" stroke="#2563EB" stroke-width="2"/>
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="#2563EB" stroke-width="2"/>
+  </g>
+
+  <!-- Output Arrow of block -->
+  <line x1="580" y1="707" x2="580" y2="725" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Block Output Latents -->
+  <text x="580" y="742" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#1F2937">Output Sequence x_i+1</text>
+  <text x="580" y="754" font-family="monospace" font-size="8" text-anchor="middle" fill="#4B5563">(B, N, D)</text>
+
+  <!-- Figure Caption -->
+  <text x="525" y="785" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="12" text-anchor="middle" fill="#4B5563" font-weight="500">Figure 1: Architecture of Diffusion Transformer (DiT) with adaptive LayerNorm (adaLN-Zero) modulation.</text>
+</svg>

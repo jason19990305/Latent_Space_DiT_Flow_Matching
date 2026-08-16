@@ -1,0 +1,36 @@
+# --- Python Bytecode & Cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# --- Virtual Environments ---
+venv/
+env/
+.venv/
+ENV/
+
+# --- Data & Datasets ---
+data/
+datasets/
+
+# --- Model Checkpoints & Logs ---
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+runs/
+.tensorboard/
+
+# --- IDE & Editor Settings ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Temporary & Scratch Files ---
+scratch/
+.system_generated/
